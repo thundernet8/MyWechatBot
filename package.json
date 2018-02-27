@@ -5,14 +5,13 @@
     "main": "index.js",
     "author": "wuxueqian <wuxueqian2010@hotmail.com>",
     "license": "MIT",
-    "keywords": [
-        "generator-ts-react"
-    ],
+    "keywords": ["generator-ts-react"],
     "scripts": {
         "build": "rimraf lib && mkdirp lib && cross-env NODE_ENV=production tsc",
         "build:dev": "rimraf lib && mkdirp lib && cross-env NODE_ENV=development tsc",
         "dev": "npm run build:dev && node index.js",
         "start": "npm run build && forever start index.js",
+        "stop": "forever stop index.js",
         "tasklist": "forever list",
         "lint": "npm run lint:ts && npm run lint:style",
         "lint:ts": "tslint -e node_modules typings -c .tslintrc.json src/**/*.tsx",
@@ -21,16 +20,8 @@
         "lint-staged:format": "prettier --write"
     },
     "lint-staged": {
-        "src/**/*.{ts,tsx}": [
-            "lint-staged:format",
-            "lint-staged:ts",
-            "git add"
-        ],
-        "src/**/*.less": [
-            "lint-staged:format",
-            "lint-staged:style",
-            "git add"
-        ]
+        "src/**/*.{ts,tsx}": ["lint-staged:format", "lint-staged:ts", "git add"],
+        "src/**/*.less": ["lint-staged:format", "lint-staged:style", "git add"]
     },
     "pre-commit": "lint-staged",
     "devDependencies": {
